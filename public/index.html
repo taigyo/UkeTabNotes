@@ -17,7 +17,7 @@
 <style>
 :root{
   --bg:#e8f0ee; --surface:#fbfdfc; --surface2:#dce9e6; --ink:#12262d; --muted:#556d74;
-  --line:#c3d4d0; --line-strong:#86a2a4;
+  --line:#c3d4d0; --line-strong:#86a2a4; --bar:var(--line-strong);
   --pri:#0f6f7a; --pri-ink:#ffffff; --pri-soft:rgba(15,111,122,.13);
   --chord:#c42e4d; --band:rgba(255,217,59,.40); --band-edge:#e0b400;
   --danger:#b3261e; --danger-ink:#ffffff;
@@ -88,9 +88,9 @@ button{cursor:pointer}
 .card-prev{display:block;padding:12px 12px 6px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
 .pv svg{display:block;width:100%;height:auto}
 .pv .ln{stroke:var(--line-strong);stroke-width:.8}
-.pv .bar{stroke:var(--ink);stroke-width:1.4}
-.pv .nt{font:700 8.5px var(--font);fill:var(--ink);text-anchor:middle}
-.pv .nt.run{font-size:6.2px}
+.pv .bar{stroke:var(--bar);stroke-width:.8}
+.pv .nt{font:700 9.5px var(--font);fill:var(--ink);text-anchor:middle}
+.pv .nt.run{font-size:6.8px}
 .pv .nbg{fill:var(--surface)}
 .pv .sy{stroke:var(--ink);stroke-width:1.2;stroke-linecap:round}
 .pv .cd{font:700 8px var(--font);fill:var(--chord);text-anchor:middle}
@@ -135,35 +135,42 @@ button{cursor:pointer}
 .ed-main{max-width:1120px;margin:0 auto;padding:12px 14px calc(300px + env(safe-area-inset-bottom,0px))}
 .measures{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,var(--mw,320px)),1fr));gap:14px;font-size:calc(16px * var(--z,1))}
 .m{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 10px 10px;scroll-margin-top:90px;scroll-margin-bottom:310px}
-.m-head{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.m-head{display:flex;align-items:center;gap:6px;margin-bottom:2px}
 .m-no{flex:none;min-width:26px;height:26px;border-radius:999px;background:var(--pri);color:var(--pri-ink);display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:.8rem}
 .m-memo{flex:1;min-width:0;height:30px;border:0;border-bottom:1px dashed var(--line-strong);background:transparent;font-size:.85rem;padding:0 4px;border-radius:6px 6px 0 0}
 .m-memo:focus{outline:none;background:var(--pri-soft);border-bottom-color:var(--pri)}
-.m-tools{display:flex;gap:2px;flex:none}
-.mini{width:30px;height:30px;border-radius:8px;border:0;background:transparent;color:var(--muted);display:inline-flex;align-items:center;justify-content:center}
+.m-tools{display:flex;align-items:center;gap:2px;margin:0 0 6px}
+.m-tools .gap{flex:1}
+.mini:disabled{opacity:.28;pointer-events:none}
+.mini{width:34px;height:32px;border-radius:8px;border:0;background:transparent;color:var(--muted);display:inline-flex;align-items:center;justify-content:center}
 .mini:hover{background:var(--pri-soft);color:var(--ink)}
 .mini[data-act="del"]:hover{background:var(--danger);color:var(--danger-ink)}
 .m-scroll{overflow-x:auto;padding-bottom:2px}
 .tab{position:relative;display:grid;grid-template-columns:1.5em repeat(var(--n),minmax(var(--sw),1fr));grid-template-rows:1.9em repeat(4,2.25em);min-width:calc(1.5em + var(--n) * var(--sw))}
 .lab{display:flex;align-items:center;justify-content:center;font-size:.72em;font-weight:700;color:var(--muted)}
-.lo{font-size:.62em;font-weight:900;margin-left:.05em;color:var(--chord)}
 .chord{min-width:0;width:100%;height:100%;border:0;border-bottom:1px dashed var(--line);background:transparent;text-align:center;font-weight:900;font-size:.86em;color:var(--chord);padding:0 1px;border-radius:6px 6px 0 0}
 .chord:focus{outline:2px solid var(--pri);outline-offset:-2px;background:var(--pri-soft)}
 .chord.col-sel{background:var(--pri-soft)}
-.cell{--chip:var(--surface);position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:manipulation;font-weight:700;font-size:1.02em;scroll-margin-bottom:310px;scroll-margin-top:90px}
+.cell{--chip:var(--surface);position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:manipulation;font-weight:700;font-size:1.2em;scroll-margin-bottom:310px;scroll-margin-top:90px}
 .cell::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line-strong)}
-.cell.first{box-shadow:inset 2px 0 0 var(--ink)}
-.cell.last{box-shadow:inset -2px 0 0 var(--ink)}
-.cell.first.last{box-shadow:inset 2px 0 0 var(--ink),inset -2px 0 0 var(--ink)}
+.cell.first{box-shadow:inset 1px 0 0 var(--bar)}
+.cell.last{box-shadow:inset -1px 0 0 var(--bar)}
+.cell.first.last{box-shadow:inset 1px 0 0 var(--bar),inset -1px 0 0 var(--bar)}
 .cell.bt::after{content:"";position:absolute;left:0;top:0;bottom:0;border-left:1px dashed var(--line)}
 .cell .v{position:relative;z-index:1;background:var(--chip);padding:0 3px;min-width:1ch;line-height:1.25;border-radius:4px;text-align:center}
 .cell .v:empty{display:none}
-.cell .v.run{font-size:.7em;white-space:nowrap;letter-spacing:-.03em}
+.cell .v.run{font-size:.74em;white-space:nowrap;letter-spacing:-.04em;padding:0 2px}
 .cell:hover{background:var(--pri-soft);--chip:transparent}
 .cell.col-sel{background:var(--pri-soft);--chip:transparent}
 .cell.col-sel .v{background:transparent}
 .cell.sel{outline:2px solid var(--pri);outline-offset:-2px;border-radius:6px}
 .cell.sel .v{background:var(--pri);color:var(--pri-ink)}
+/* 2マスにわたる連続音（5-7-5-）：2マスぶんの幅に、音と「-」を均等に並べる */
+.cell .v.wide,.cell.sel .v.wide,.cell.col-sel .v.wide{position:absolute;left:0;top:50%;height:1.7em;margin-top:-.85em;width:calc(var(--sp) * 100%);min-width:0;padding:0;background:none;box-shadow:none;border-radius:0;pointer-events:none;color:var(--ink);container-type:size}
+/* 2マスにわたる連続音：1本の文字列を2マスの中央に。入りきらないときだけ文字を小さくする（cqw＝この枠の幅。小さくしすぎず、多少のはみ出しは許す） */
+.cell .v.wide .wt{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;padding:0 3px;line-height:1.25;border-radius:4px;background:var(--surface);font-size:clamp(.62em,calc(94cqw / (var(--len) * .6)),1em)}
+.cell.sel .v.wide .wt{background:var(--pri);color:var(--pri-ink)}
+.cell.wd .slm{left:calc(var(--sp) * 100% - .45em)}
 /* 記号：スライド（音と音のあいだ）・4弦をまたぐスラッシュ／クロススラッシュ */
 .slm{position:absolute;z-index:2;left:calc(100% - .45em);top:50%;width:.9em;height:.9em;margin-top:-.45em;pointer-events:none}
 .slm::before{content:"";position:absolute;left:50%;top:-8%;height:116%;width:2px;margin-left:-1px;background:var(--ink);border-radius:1px;transform:rotate(42deg)}
@@ -222,23 +229,27 @@ button{cursor:pointer}
 .labels{display:grid;grid-template-rows:1.9em repeat(4,2.7em)}
 .labels span{display:flex;align-items:center;justify-content:center;font-size:.72em;font-weight:700;color:var(--muted)}
 .steps{position:relative}
-.srow{display:grid;grid-template-columns:repeat(var(--n),1fr)}
+.srow{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr))}   /* 列は必ず等幅（再生ハイライトの位置計算がこの前提） */
 .pc{display:flex;align-items:flex-end;justify-content:center;height:1.9em;padding-bottom:.1em;font-weight:900;color:var(--chord);white-space:nowrap;position:relative;z-index:1}
 .pc span{font-size:1.15em;line-height:1.2}
 .lines{position:relative}
-.lines::before,.lines::after{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--ink)}
+.lines::before,.lines::after{content:"";position:absolute;top:0;bottom:0;width:1px;background:var(--bar)}
 .lines::before{left:0}
 .lines::after{right:0}
-.pm.last .lines::after{width:5px}
+.pm.last .lines::after{width:1px}
 .pn{position:relative;display:flex;align-items:center;justify-content:center;height:2.7em;font-weight:900}
-.pn .slm{font-size:1.25em}
+.pn .slm{font-size:1.45em}
 .pn::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line-strong)}
 .pn.bt::after{content:"";position:absolute;left:0;top:0;bottom:0;border-left:1px dashed var(--line)}
-.pn span{position:relative;z-index:1;background:var(--surface);padding:0 .12em;line-height:1.1;border-radius:.2em;font-size:1.25em}
-.pn span.run{font-size:.85em;white-space:nowrap;letter-spacing:-.03em}
-.sheet.dense .pn span{font-size:1.05em}
-.sheet.dense .pn span.run{font-size:.72em}
-.sheet.dense .pn .slm{font-size:1.05em}
+.pn span{position:relative;z-index:1;background:var(--surface);padding:0 .12em;line-height:1.1;border-radius:.2em;font-size:1.45em}
+.pn span.run{font-size:.72em;white-space:nowrap;letter-spacing:-.04em}
+.pn .wide{position:absolute;left:0;top:0;bottom:0;width:calc(var(--sp) * 100%);z-index:1;pointer-events:none;container-type:size;font-size:1.45em}
+.sheet.dense .pn .wide{font-size:1.2em}
+.sheet .pn .wide span.wt{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;padding:0 .12em;font-size:clamp(.62em,calc(94cqw / (var(--len) * .6)),1em)}
+.pn.wd .slm{left:calc(var(--sp) * 100% - .45em)}
+.sheet.dense .pn span{font-size:1.2em}
+.sheet.dense .pn span.run{font-size:.74em}
+.sheet.dense .pn .slm{font-size:1.2em}
 .band{position:absolute;top:0;bottom:0;left:0;width:calc(100% / var(--n));transform:translateX(calc(var(--s,0) * 100%));background:var(--band);border-left:2px solid var(--band-edge);border-right:2px solid var(--band-edge);z-index:3;pointer-events:none;opacity:0;transition:transform .07s linear}
 .pm.cur .band{opacity:1}
 .pm-prog{height:4px;border-radius:2px;background:var(--surface2);margin-top:.5em;overflow:hidden}
@@ -283,6 +294,7 @@ button{cursor:pointer}
 .modal h2{margin:0 0 10px;font-size:1.1rem}
 .modal-msg{margin:0 0 16px;overflow-wrap:anywhere}
 .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap}
+.modal .row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .modal textarea{width:100%;min-height:110px;padding:10px;border-radius:10px;border:1px solid var(--line-strong);background:var(--bg);font-size:.8rem;font-family:ui-monospace,Menlo,Consolas,monospace;resize:vertical}
 .modal .sub{margin:12px 0 6px;font-size:.85rem;font-weight:700}
 .modal .small{font-size:.8rem;color:var(--muted);margin:0 0 8px}
@@ -291,6 +303,7 @@ button{cursor:pointer}
 body[data-view="edit"] #toast{bottom:calc(215px + env(safe-area-inset-bottom,0px))}
 body[data-view="play"] #toast{bottom:calc(150px + env(safe-area-inset-bottom,0px))}
 .toast-act{border:0;background:transparent;color:var(--pri);font-weight:900;text-decoration:underline;padding:2px 4px;filter:brightness(1.6)}
+@supports (color:color-mix(in srgb,red,blue)){:root{--bar:color-mix(in srgb,var(--ink) 32%,transparent)}}
 </style>
 </head>
 <body data-view="lib">
@@ -324,6 +337,12 @@ const fmtDate = ts => { try { return new Date(ts).toLocaleDateString('ja-JP', { 
 const fmtTime = ms => { const s = Math.max(0, Math.round(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
 const disp = v => v.replace(/x/g, '×');
 const isRun = v => v.indexOf('-') >= 0;
+const noteList = v => v.split('-').filter(Boolean);
+const isWide = v => /-$/.test(v) && noteList(v).length >= 2;      // 「5-7-5-」：2マスにわたる連続音
+const wideCols = (song, s) => Math.max(1, Math.min(2, song.beats * song.spb - s));  // 跨ぐマス数＝2マス（小節の最後のマスでは1マスだけ）
+// 2マスにわたる連続音：音は「1マス目の中央」から「2マス目の中央」まで均等に並べる。2マス目がない小節の最後のマスだけ、1マスの表示に戻す
+const showWide = (song, s, v) => isWide(v) && wideCols(song, s) >= 2;
+const runText = v => { const n = noteList(v); return n.length >= 2 ? n.map(disp).join('-') : disp(v); };   // 末尾の「-」は表示しない（単音の入力待ち「5-」はそのまま）
 const firstNote = v => v.split('-')[0];
 const lastNote = v => { const p = v.split('-').filter(Boolean); return p.length ? p[p.length - 1] : ''; };
 
@@ -360,12 +379,16 @@ const ICONS = {
   copy: '<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/>',
   trash: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/>',
   up: '<path d="M6 15l6-6 6 6"/>',
+  top: '<path d="M6 5h12M7 17l5-6 5 6"/>',
+  bottom: '<path d="M6 19h12M7 7l5 6 5-6"/>',
   down: '<path d="M6 9l6 6 6-6"/>',
   undo: '<path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/>',
   redo: '<path d="M15 14l5-5-5-5"/><path d="M20 9H10a6 6 0 0 0 0 12h3"/>',
   sliders: '<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>',
   pencil: '<path d="M4 20h4L19 9l-4-4L4 16z"/>',
   search: '<circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/>',
+  export: '<path d="M12 15V4M8 8l4-4 4 4M5 14v5h14v-5"/>',
+  import: '<path d="M12 4v11M8 11l4 4 4-4M5 14v5h14v-5"/>',
   archive: '<path d="M4 7h16v4H4zM6 11v8h12v-8M10 15h4"/>'
 };
 function ic(name, size = 18) {
@@ -401,7 +424,9 @@ function cleanFret1(v) {
 function cleanFret(v) {
   v = String(v == null ? '' : v).trim().toLowerCase();
   if (v.indexOf('-') < 0) return cleanFret1(v);
-  return v.split('-').map(cleanFret1).filter(Boolean).slice(0, 4).join('-');
+  const notes = v.split('-').map(cleanFret1).filter(Boolean).slice(0, 4);
+  // 末尾の「-」は「2マスにわたる」印。2音以上のときだけ残す（「5-」のような入力待ちは単音に戻す）
+  return notes.join('-') + (notes.length >= 2 && /-$/.test(v) ? '-' : '');
 }
 
 function normalizeSong(raw) {
@@ -534,7 +559,9 @@ let toastTimer = 0;
 function toast(msg, actionLabel, fn) {
   const el = document.getElementById('toast');
   clearTimeout(toastTimer);
-  el.replaceChildren(h('span', {}, msg), actionLabel ? h('button', { class: 'toast-act', type: 'button', onClick: () => { el.classList.remove('show'); if (fn) fn(); } }, actionLabel) : null);
+  const kids = [h('span', {}, msg)];
+  if (actionLabel) kids.push(h('button', { class: 'toast-act', type: 'button', onClick: () => { el.classList.remove('show'); if (fn) fn(); } }, actionLabel));
+  el.replaceChildren(...kids);
   el.classList.add('show');
   toastTimer = setTimeout(() => el.classList.remove('show'), 4500);
 }
@@ -552,9 +579,8 @@ function seg(opts, cur, onPick) {
 /* ---- 共通：弦ラベル・記号・設定パネル ---- */
 const ORDER = [3, 2, 1, 0]; // 画面の上→下：A・E・C・G（一般的なTab譜）
 
-// High-G / Low-G の違いは、G弦のラベル（Low-Gは「低」付き）として表示します
+// High-G / Low-G のどちらでも、G弦のラベルは「G」のままにします（違いは譜面上部のタグで分かる）
 function strLabel(song, k) {
-  if (k === 0 && song.tuning === 'low') return h('span', {}, 'G', h('span', { class: 'lo' }, '低'));
   return STRINGS[k];
 }
 
@@ -618,6 +644,13 @@ function isStandalone() {
 /* =========================================================
    ① 管理画面
    ========================================================= */
+// 再生画面のマスの数字（2マスにわたる連続音は2マスぶんの幅に均等に並べる）
+function pnVal(song, v, s) {
+  if (v === '') return null;
+  if (!showWide(song, s, v)) return h('span', { class: isRun(v) ? 'run' : '' }, runText(v));
+  const t = runText(v);
+  return h('div', { class: 'wide', style: { '--len': t.length } }, h('span', { class: 'wt' }, t));
+}
 function previewSVG(song) {
   const ms = song.measures.slice(0, 2), N = song.beats * song.spb, ord = ORDER;
   const W = 240, x0 = 8, mw = 112, ys = [26, 37, 48, 59];
@@ -636,7 +669,12 @@ function previewSVG(song) {
       if (st.c) out += `<text class="cd" x="${cx.toFixed(1)}" y="16">${esc(st.c)}</text>`;
       ord.forEach((k, r) => {
         const v = st.f[k]; if (v === '') return;
-        const t = disp(v), run = isRun(v), w = t.length * (run ? 3.9 : 5.2) + 2;
+        if (showWide(song, s, v)) {   // 2マスにわたる連続音：2マスの中央に1本の文字列で
+          const t = runText(v), nx = x0 + mw * mi + (s + wideCols(song, s) / 2) / N * mw, w = t.length * 4.2 + 2;
+          out += `<rect class="nbg" x="${(nx - w / 2).toFixed(1)}" y="${ys[r] - 4.6}" width="${w.toFixed(1)}" height="9.2"/><text class="nt run" x="${nx.toFixed(1)}" y="${ys[r] + 3}">${esc(t)}</text>`;
+          return;
+        }
+        const t = runText(v), run = isRun(v), w = t.length * (run ? 4.2 : 5.8) + 2;
         out += `<rect class="nbg" x="${(cx - w / 2).toFixed(1)}" y="${ys[r] - 4.6}" width="${w.toFixed(1)}" height="9.2"/><text class="nt${run ? ' run' : ''}" x="${cx.toFixed(1)}" y="${ys[r] + 3}">${esc(t)}</text>`;
       });
     });
@@ -657,6 +695,65 @@ function viewLibrary() {
   function createNew() { const s = newSong(); songs.unshift(s); dirty = true; saveNow(); navigate('/edit/' + s.id); }
   function addSample() { const s = makeSample(); songs.unshift(s); dirty = true; saveNow(); paint(); toast('サンプル譜面を追加しました'); }
 
+  // 1曲を書き出し：バックアップと同じ形式のテキストをクリップボードへ（読み込みで貼り付ければ取り込める）
+  async function exportSong(song) {
+    const text = JSON.stringify({ v: 1, songs: [song] });
+    let ok = false;
+    try { await navigator.clipboard.writeText(text); ok = true; } catch (e) { /* fall through */ }
+    if (!ok) {
+      const ta = h('textarea', { readonly: true, style: { position: 'fixed', opacity: '0', left: '0', top: '0' }, value: text });
+      document.body.append(ta); ta.select();
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+    }
+    if (ok) { toast(`「${song.title || '無題'}」をコピーしました。「曲を読み込む」で貼り付けると取り込めます`); return; }
+    const out = h('textarea', { readonly: true, 'aria-label': '書き出しテキスト', value: text });
+    modal('この曲を書き出し', h('div', {}, h('p', { class: 'small' }, '自動でコピーできませんでした。下のテキストを全部選んでコピーしてください。'), out), [{ label: '閉じる', value: null }]);
+    out.focus(); out.select();
+  }
+  // テキスト（書き出した1曲／バックアップ）から曲を追加する。同じIDがあれば別の曲として追加
+  function addSongsFromText(text) {
+    const d = JSON.parse(String(text).trim());
+    const arr = Array.isArray(d) ? d : Array.isArray(d.songs) ? d.songs : [d];
+    const ids = new Set(songs.map(x => x.id)), added = [];
+    arr.forEach(r => {
+      if (!r || typeof r !== 'object') return;
+      const sg = normalizeSong(r); if (ids.has(sg.id)) sg.id = uid(); ids.add(sg.id); songs.push(sg); added.push(sg);
+    });
+    if (!added.length) throw new Error('empty');
+    dirty = true; saveNow(); paint();
+    return added;
+  }
+  function importDialog() {
+    const inp = h('textarea', { placeholder: 'ここに、書き出した曲のテキストを貼り付け', 'aria-label': '読み込むテキスト' });
+    const msg = h('p', { class: 'small' }, '');
+    let box = null;
+    const finish = added => {
+      toast(added.length === 1 ? `「${added[0].title || '無題'}」を読み込みました` : `${added.length}曲を読み込みました`);
+      const closeBtn = box && box.querySelector(':scope > .modal-actions .btn'); if (closeBtn) closeBtn.click();
+    };
+    const run = () => {
+      try { finish(addSongsFromText(inp.value)); }
+      catch (e) { msg.textContent = '読み込めませんでした。書き出したテキストを、そのまま貼り付けてください。'; }
+    };
+    const pasteBtn = h('button', { class: 'btn', type: 'button', onClick: async () => {
+      try { inp.value = await navigator.clipboard.readText(); } catch (e) { msg.textContent = '貼り付けできませんでした。入力欄を長押し（または Ctrl+V）で貼り付けてください。'; return; }
+      run();
+    } }, ic('import', 16), 'コピーしたものを貼り付けて読み込む');
+    const fileIn = h('input', { type: 'file', accept: '.json,application/json,text/plain', hidden: true, onChange: e => {
+      const f = e.target.files && e.target.files[0]; if (!f) return;
+      const r = new FileReader(); r.onload = () => { inp.value = String(r.result); run(); }; r.readAsText(f);
+    } });
+    const body = h('div', {},
+      h('p', { class: 'small' }, '曲カードの書き出しボタンでコピーしたテキストを読み込みます。同じ曲があっても上書きせず、別の曲として追加されます。'),
+      h('div', { class: 'row' }, pasteBtn), inp,
+      h('div', { class: 'row' }, h('button', { class: 'btn primary', type: 'button', onClick: run }, '上のテキストを読み込む（追加）'), h('label', { class: 'btn file-btn' }, 'ファイルから', fileIn)),
+      msg);
+    modal('曲を読み込む', body, [{ label: '閉じる', value: null }]);
+    box = body.closest('.modal');
+    inp.focus();
+  }
+
   function card(song) {
     const go = p => e => { if (e) e.preventDefault(); navigate(p); };
     return h('article', { class: 'card' },
@@ -669,11 +766,7 @@ function viewLibrary() {
       h('div', { class: 'card-actions' },
         h('button', { class: 'btn primary', type: 'button', onClick: go('/play/' + song.id) }, ic('play', 16), '再生'),
         h('button', { class: 'btn', type: 'button', onClick: go('/edit/' + song.id) }, ic('pencil', 16), '編集'),
-        h('button', { class: 'btn icon', type: 'button', title: '複製', 'aria-label': '複製', onClick: () => {
-          const c = normalizeSong(JSON.parse(JSON.stringify(song)));
-          c.id = uid(); c.title = (song.title || '無題') + ' のコピー'; c.created = c.updated = Date.now();
-          songs.unshift(c); dirty = true; saveNow(); paint(); toast('複製しました');
-        } }, ic('copy', 16)),
+        h('button', { class: 'btn icon', type: 'button', title: 'この曲を書き出し（クリップボードにコピー）', 'aria-label': 'この曲を書き出し', onClick: () => exportSong(song) }, ic('export', 16)),
         h('button', { class: 'btn icon', type: 'button', title: '削除', 'aria-label': '削除', onClick: async () => {
           if (await confirmDlg(`「${song.title || '無題'}」を削除します。この操作は元に戻せません。`, '削除する', true)) {
             songs = songs.filter(s => s.id !== song.id); dirty = true; saveNow(); paint();
@@ -716,16 +809,8 @@ function viewLibrary() {
       copyBtn.textContent = ok ? 'コピーしました' : '手動でコピーしてください';
     } }, 'コピー');
     const impBtn = h('button', { class: 'btn primary', type: 'button', onClick: () => {
-      try {
-        const d = JSON.parse(inp.value);
-        const arr = Array.isArray(d) ? d : Array.isArray(d.songs) ? d.songs : [d];
-        const ids = new Set(songs.map(s => s.id));
-        let n = 0;
-        arr.forEach(r => { const s = normalizeSong(r); if (ids.has(s.id)) s.id = uid(); ids.add(s.id); songs.push(s); n++; });
-        if (!n) throw new Error('empty');
-        dirty = true; saveNow(); paint();
-        impBtn.textContent = `${n}曲を読み込みました`;
-      } catch (e) { impBtn.textContent = '読み込めませんでした。テキストを確認してください'; }
+      try { const n = addSongsFromText(inp.value).length; impBtn.textContent = `${n}曲を読み込みました`; }
+      catch (e) { impBtn.textContent = '読み込めませんでした。テキストを確認してください'; }
     } }, '読み込む（追加）');
     const dlBtn = h('button', { class: 'btn', type: 'button', onClick: () => {
       try {
@@ -761,6 +846,7 @@ function viewLibrary() {
     h('div', { class: 'toolbar' },
       h('div', { class: 'search' }, ic('search', 18), search), sort,
       h('button', { class: 'btn', type: 'button', onClick: backupDialog }, ic('archive', 16), 'バックアップ'),
+      h('button', { class: 'btn', type: 'button', onClick: importDialog }, ic('import', 16), '曲を読み込む'),
       h('button', { class: 'btn primary', type: 'button', onClick: createNew }, ic('plus', 16), '新しい譜面')),
     count, list,
     h('div', { class: 'foot' },
@@ -889,18 +975,24 @@ function viewEditor(id) {
     ORDER.forEach(k => {
       tab.append(h('span', { class: 'lab' }, strLabel(song, k)));
       m.steps.forEach((st, s) => {
-        tab.append(h('div', { class: 'cell' + (s === 0 ? ' first' : '') + (s === n - 1 ? ' last' : '') + (s > 0 && s % spb === 0 ? ' bt' : ''), dataset: { m: mi, s, k } },
-          h('span', { class: 'v' + (isRun(st.f[k]) ? ' run' : '') }, disp(st.f[k])),
-          st.sl[k] ? h('i', { class: 'slm ' + slideDir(song, mi, s, k) }) : null));
+        const cell = h('div', { class: 'cell' + (s === 0 ? ' first' : '') + (s === n - 1 ? ' last' : '') + (s > 0 && s % spb === 0 ? ' bt' : ''), dataset: { m: mi, s, k } },
+          h('span', { class: 'v' }),
+          st.sl[k] ? h('i', { class: 'slm ' + slideDir(song, mi, s, k) }) : null);
+        paintVal(cell, st.f[k], s);
+        tab.append(cell);
       });
     });
     tab.append(h('div', { class: 'symlayer' }, m.steps.map((st, s) => (st.y ? symEl(st.y, s) : null))));
-    const tool = (act, icon, title) => h('button', { class: 'mini', type: 'button', title, 'aria-label': title, dataset: { act } }, ic(icon, 16));
+    const tool = (act, icon, title, off) => h('button', { class: 'mini', type: 'button', title, 'aria-label': title, disabled: off, dataset: { act } }, ic(icon, 16));
+    const first = mi === 0, last = mi === song.measures.length - 1;
     return h('section', { class: 'm', dataset: { m: mi } },
       h('div', { class: 'm-head' },
         h('span', { class: 'm-no' }, String(mi + 1)),
-        h('input', { class: 'm-memo', type: 'text', maxlength: '80', placeholder: 'メモ（歌詞・パート名など）', 'aria-label': `${mi + 1}小節のメモ`, dataset: { m: mi }, value: m.memo }),
-        h('div', { class: 'm-tools' }, tool('up', 'up', '1つ上へ'), tool('down', 'down', '1つ下へ'), tool('dup', 'copy', 'この小節を複製'), tool('add', 'plus', '下に空の小節を追加'), tool('del', 'trash', 'この小節を削除'))),
+        h('input', { class: 'm-memo', type: 'text', maxlength: '80', placeholder: 'メモ（歌詞・パート名など）', 'aria-label': `${mi + 1}小節のメモ`, dataset: { m: mi }, value: m.memo })),
+      h('div', { class: 'm-tools' },
+        tool('top', 'top', '一番上へ移動', first), tool('up', 'up', '1つ上へ', first), tool('down', 'down', '1つ下へ', last), tool('bottom', 'bottom', '一番下へ移動', last),
+        h('span', { class: 'gap' }),
+        tool('dup', 'copy', 'この小節を複製'), tool('add', 'plus', '下に空の小節を追加'), tool('del', 'trash', 'この小節を削除')),
       h('div', { class: 'm-scroll' }, tab));
   }
 
@@ -920,10 +1012,26 @@ function viewEditor(id) {
     measuresEl.replaceChildren(...song.measures.map((_, i) => buildMeasure(i)), addRow);
     updateSelUI(false); updateInfo();
   }
+  // マスの数字を描く。2マスにわたる連続音（5-7-5-）は、2マスぶんの幅に音を均等に並べる
+  function paintVal(el, v, s) {
+    const sp = el.querySelector('.v'), wide = showWide(song, s, v);
+    sp.replaceChildren();
+    el.classList.toggle('wd', wide);
+    if (wide) {
+      const t = runText(v);
+      el.style.setProperty('--sp', wideCols(song, s));
+      sp.style.setProperty('--len', t.length);
+      sp.className = 'v wide';
+      sp.append(h('b', { class: 'wt' }, t));
+    } else {
+      el.style.removeProperty('--sp'); sp.style.removeProperty('--len');
+      sp.className = 'v' + (isRun(v) ? ' run' : '');
+      sp.textContent = runText(v);
+    }
+  }
   function paintCell(m, s, k) {
     const el = cellEl(m, s, k); if (!el) return;
-    const v = song.measures[m].steps[s].f[k], sp = el.querySelector('.v');
-    sp.textContent = disp(v); sp.className = 'v' + (isRun(v) ? ' run' : '');
+    paintVal(el, song.measures[m].steps[s].f[k], s);
   }
   function syncSlideCell(m, s, k) {
     const el = cellEl(m, s, k); if (!el) return;
@@ -960,13 +1068,15 @@ function viewEditor(id) {
   function updateInfo() {
     const spb = song.spb, beat = Math.floor(sel.s / spb) + 1, sub = sel.s % spb;
     const subTxt = sub === 0 ? '' : (spb === 2 || sub === 2 ? '（裏）' : '（16分）');
-    infoEl.replaceChildren('選択中：', h('b', {}, `${sel.m + 1}小節 ${beat}拍目${subTxt} ${STRINGS[sel.k]}弦`));
+    const cv = (song.measures[sel.m].steps[sel.s] || { f: [''] }).f[sel.k] || '', nn = noteList(cv).length;
+    const runTxt = !isRun(cv) ? '' : nn <= 1 ? '（次の音を入力）' : isWide(cv) ? `（素早く${nn}音・2マス）` : `（素早く${nn}音・1マス）`;
+    infoEl.replaceChildren('選択中：', h('b', {}, `${sel.m + 1}小節 ${beat}拍目${subTxt} ${STRINGS[sel.k]}弦`), runTxt);
     updateSymBtns();
   }
   // 「5-」のように次の音を待っている状態のまま別のマスへ移ったら、末尾の「-」を取り除く
   function tidyPending() {
     const st = song.measures[sel.m] && song.measures[sel.m].steps[sel.s];
-    if (!st || !/-$/.test(st.f[sel.k])) return;
+    if (!st || !/-$/.test(st.f[sel.k]) || noteList(st.f[sel.k]).length >= 2) return;   // 2音以上の末尾「-」は「2マス」の印なので残す
     st.f[sel.k] = st.f[sel.k].replace(/-+$/, ''); touch(); paintCell(sel.m, sel.s, sel.k); syncSlides(sel.m);
   }
   function setSel(m, s, k, scroll) {
@@ -989,7 +1099,7 @@ function viewEditor(id) {
     const { m, s, k } = sel, st = song.measures[m] && song.measures[m].steps[s];
     if (!st || st.f[k] === val) return;
     snapshot(`cell:${m}:${s}:${k}`);
-    st.f[k] = val; touch(); paintCell(m, s, k); syncSlides(m);
+    st.f[k] = val; touch(); paintCell(m, s, k); syncSlides(m); updateInfo();
   }
   // 数字の入力。「5-」の直後なら同じマスに次の音として足す。すぐ続けて押した数字は2桁にまとめる（1→2 で12）
   function enterDigit(d) {
@@ -997,7 +1107,7 @@ function viewEditor(id) {
     let val = d;
     if (cur !== '' && cur !== 'x') {
       const parts = cur.split('-'), last = parts[parts.length - 1];
-      if (last === '') val = cur + d;
+      if (last === '') { if (noteList(cur).length >= 4) { toast('1つのマスに入れられるのは4音までです'); return; } val = cur + d; }
       else if (last.length === 1 && lastDigit.cell === key && now - lastDigit.t < 900 && Number(last + d) <= 15) {
         parts[parts.length - 1] = last + d; val = parts.join('-');
       }
@@ -1008,13 +1118,14 @@ function viewEditor(id) {
   function enterFret(n) {
     const { m, s, k } = sel, cur = song.measures[m].steps[s].f[k];
     lastDigit = { cell: '', t: 0 };
+    if (/-$/.test(cur) && noteList(cur).length >= 4) { toast('1つのマスに入れられるのは4音までです'); return; }
     setVal(/-$/.test(cur) ? cur + n : n);
   }
-  // 同じマスにもう1音（素早く 5→7→5 と弾く）。最大4音
+  // 「-」：同じマスにもう1音（素早く 5→7→5）。最大4音。
+  // 2音以上のあとの末尾の「-」（5-7-5-）は「2マスにわたる」印になる
   function addNote() {
     const { m, s, k } = sel, cur = song.measures[m].steps[s].f[k];
     if (cur === '' || cur === 'x' || /-$/.test(cur)) return;
-    if (cur.split('-').length >= 4) { toast('1つのマスに入れられるのは4音までです'); return; }
     lastDigit = { cell: '', t: 0 };
     setVal(cur + '-');
   }
@@ -1066,6 +1177,8 @@ function viewEditor(id) {
     else if (name === 'add') { snapshot(); ms.splice(m + 1, 0, newMeasure(N())); afterStruct(m + 1); }
     else if (name === 'up') { if (m === 0) return; snapshot(); [ms[m - 1], ms[m]] = [ms[m], ms[m - 1]]; afterStruct(m - 1); }
     else if (name === 'down') { if (m >= ms.length - 1) return; snapshot(); [ms[m + 1], ms[m]] = [ms[m], ms[m + 1]]; afterStruct(m + 1); }
+    else if (name === 'top') { if (m === 0) return; snapshot(); ms.unshift(ms.splice(m, 1)[0]); afterStruct(0); toast(`${m + 1}小節目を一番上へ移動しました`, '元に戻す', doUndo); }
+    else if (name === 'bottom') { if (m >= ms.length - 1) return; snapshot(); ms.push(ms.splice(m, 1)[0]); afterStruct(ms.length - 1); toast(`${m + 1}小節目を一番下へ移動しました`, '元に戻す', doUndo); }
     else if (name === 'del') {
       if (ms.length <= 1) { toast('最後の1小節は削除できません'); return; }
       snapshot(); ms.splice(m, 1); afterStruct(Math.min(m, ms.length - 1));
@@ -1153,7 +1266,7 @@ function viewEditor(id) {
   padKeys.push({ label: '5-7', aria: '同じマスにもう1音足す（素早く弾く）', fn: addNote, sp: true, run: true });
   padKeys.push({ label: '◀', aria: '左へ', fn: () => move(-1, 0), sp: true });
   padKeys.push({ label: '▶', aria: '右へ', fn: () => move(1, 0), sp: true });
-  const pad = h('div', { class: 'pad' }, padKeys.map(k => h('button', { class: 'key' + (k.sp ? ' sp' : '') + (k.run ? ' run' : ''), title: k.run ? '同じマスにもう1音足す（キー: -）。例：5 → 5-7 → 7 → 5-7-5' : null, type: 'button', 'aria-label': k.aria, onMousedown: noMouseFocus, onClick: k.fn }, k.label)));
+  const pad = h('div', { class: 'pad' }, padKeys.map(k => h('button', { class: 'key' + (k.sp ? ' sp' : '') + (k.run ? ' run' : ''), title: k.run ? '同じマスにもう1音足す（キー: -）。例：5 → - → 7 → - → 5 で「5-7-5」、続けて - を押すと2マス「5-7-5-」' : null, type: 'button', 'aria-label': k.aria, onMousedown: noMouseFocus, onClick: k.fn }, k.label)));
   const fillChk = h('input', { type: 'checkbox', checked: !!prefs.chordFill, onChange: e => { prefs.chordFill = e.target.checked; savePrefs(); } });
   const dock = h('div', { class: 'dock' }, h('div', { class: 'dock-in' },
     h('div', { class: 'dock-info' }, infoEl,
@@ -1180,7 +1293,7 @@ function viewEditor(id) {
       h('label', { class: 'fld' }, h('span', {}, '1拍の分け方'), spbSel),
       h('div', { class: 'fld' }, h('span', {}, 'G弦のチューニング'), tuneSeg),
       statusEl),
-    h('p', { class: 'kbd-hint' }, 'キーボード：数字でフレット、- で同じマスにもう1音（素早く 5-7-5）、x でミュート、s でスライド、/ で「続けて弾く」、* で「連続で弾く」、矢印で移動、Enter で右へ、c でコード入力、Ctrl+Z で元に戻す。'),
+    h('p', { class: 'kbd-hint' }, 'キーボード：数字でフレット、- で同じマスにもう1音（5-7-5）、さらに - で2マス（5-7-5-）、x でミュート、s でスライド、/ で「続けて弾く」、* で「連続で弾く」、矢印で移動、Enter で右へ、c でコード入力、Ctrl+Z で元に戻す。'),
     h('main', { class: 'ed-main' }, measuresEl),
     dock, settings.pop);
   syncTuneUI();
@@ -1319,8 +1432,8 @@ function viewPlayer(id) {
       const chordsRow = h('div', { class: 'srow' }, m.steps.map(st => h('div', { class: 'pc' }, st.c ? h('span', {}, st.c) : null)));
       const symlayer = h('div', { class: 'symlayer' }, m.steps.map((st, s) => (st.y ? symEl(st.y, s) : null)));
       const lines = h('div', { class: 'lines' }, ord.map(k => h('div', { class: 'srow' },
-        m.steps.map((st, s) => h('div', { class: 'pn' + (s > 0 && s % spb === 0 ? ' bt' : '') },
-          st.f[k] !== '' ? h('span', { class: isRun(st.f[k]) ? 'run' : '' }, disp(st.f[k])) : null,
+        m.steps.map((st, s) => h('div', { class: 'pn' + (s > 0 && s % spb === 0 ? ' bt' : '') + (showWide(song, s, st.f[k]) ? ' wd' : ''), style: showWide(song, s, st.f[k]) ? { '--sp': wideCols(song, s) } : null },
+          pnVal(song, st.f[k], s),
           st.sl[k] ? h('i', { class: 'slm ' + slideDir(song, mi, s, k) }) : null)))), symlayer);
       const steps = h('div', { class: 'steps' }, band, chordsRow, lines);
       const labels = h('div', { class: 'labels' }, h('span'), ord.map(k => h('span', {}, strLabel(song, k))));
