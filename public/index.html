@@ -90,6 +90,7 @@ button{cursor:pointer}
 .pv .ln{stroke:var(--line-strong);stroke-width:.8}
 .pv .bar{stroke:var(--ink);stroke-width:1.4}
 .pv .nt{font:700 8.5px var(--font);fill:var(--ink);text-anchor:middle}
+.pv .nt.run{font-size:6.2px}
 .pv .nbg{fill:var(--surface)}
 .pv .sy{stroke:var(--ink);stroke-width:1.2;stroke-linecap:round}
 .pv .cd{font:700 8px var(--font);fill:var(--chord);text-anchor:middle}
@@ -157,6 +158,7 @@ button{cursor:pointer}
 .cell.bt::after{content:"";position:absolute;left:0;top:0;bottom:0;border-left:1px dashed var(--line)}
 .cell .v{position:relative;z-index:1;background:var(--chip);padding:0 3px;min-width:1ch;line-height:1.25;border-radius:4px;text-align:center}
 .cell .v:empty{display:none}
+.cell .v.run{font-size:.7em;white-space:nowrap;letter-spacing:-.03em}
 .cell:hover{background:var(--pri-soft);--chip:transparent}
 .cell.col-sel{background:var(--pri-soft);--chip:transparent}
 .cell.col-sel .v{background:transparent}
@@ -166,11 +168,11 @@ button{cursor:pointer}
 .slm{position:absolute;z-index:2;left:calc(100% - .45em);top:50%;width:.9em;height:.9em;margin-top:-.45em;pointer-events:none}
 .slm::before{content:"";position:absolute;left:50%;top:-8%;height:116%;width:2px;margin-left:-1px;background:var(--ink);border-radius:1px;transform:rotate(42deg)}
 .slm.dn::before{transform:rotate(-42deg)}
-.symlayer{position:absolute;z-index:2;display:grid;grid-template-columns:repeat(var(--n),1fr);pointer-events:none}
+.symlayer{position:absolute;z-index:2;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));grid-template-rows:minmax(0,1fr);pointer-events:none}
 .tab .symlayer{left:1.5em;right:0;top:1.9em;bottom:0}
 .lines .symlayer{inset:0}
-.sym{grid-row:1;min-width:0;padding:.06em .2em}
-.sym svg{display:block;width:100%;height:100%;overflow:visible}
+.sym{grid-row:1;position:relative;min-width:0;min-height:0;padding:.06em .2em}
+.sym svg{position:absolute;left:.2em;right:.2em;top:.06em;bottom:.06em;width:calc(100% - .4em);height:calc(100% - .12em);display:block;overflow:visible}
 .sym line{stroke:var(--ink);stroke-width:2.2;vector-effect:non-scaling-stroke;stroke-linecap:round}
 .add-row{grid-column:1/-1;display:flex;gap:10px;justify-content:center;padding:6px 0}
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line-strong);padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px))}
@@ -186,7 +188,8 @@ button{cursor:pointer}
 .symbtn{min-height:36px;padding:0 12px;font-size:.85rem}
 .symbtn[aria-pressed="true"]{background:var(--pri);border-color:var(--pri);color:var(--pri-ink)}
 .pad{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
-@media (min-width:860px){.pad{grid-template-columns:repeat(20,1fr);gap:6px}}
+@media (min-width:860px){.pad{grid-template-columns:repeat(21,1fr);gap:6px}}
+.key.run{font-size:.74rem;letter-spacing:-.03em}
 .key{height:42px;border-radius:10px;border:1px solid var(--line-strong);background:var(--surface2);font-weight:900;font-size:1rem;padding:0}
 .key:active{background:var(--pri);color:var(--pri-ink)}
 .key.sp{background:var(--surface);color:var(--muted)}
@@ -216,21 +219,26 @@ button{cursor:pointer}
 .pm-no{font-size:.72em;font-weight:900;color:var(--muted);background:var(--surface2);border-radius:999px;padding:.05em .65em}
 .pm-memo{font-size:.82em;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pm-grid{display:grid;grid-template-columns:1.5em 1fr;margin-top:.15em}
-.labels{display:grid;grid-template-rows:1.9em repeat(4,2.15em)}
+.labels{display:grid;grid-template-rows:1.9em repeat(4,2.7em)}
 .labels span{display:flex;align-items:center;justify-content:center;font-size:.72em;font-weight:700;color:var(--muted)}
 .steps{position:relative}
 .srow{display:grid;grid-template-columns:repeat(var(--n),1fr)}
-.pc{display:flex;align-items:flex-end;justify-content:center;height:1.9em;padding-bottom:.1em;font-weight:900;font-size:1.15em;color:var(--chord);white-space:nowrap;position:relative;z-index:1}
+.pc{display:flex;align-items:flex-end;justify-content:center;height:1.9em;padding-bottom:.1em;font-weight:900;color:var(--chord);white-space:nowrap;position:relative;z-index:1}
+.pc span{font-size:1.15em;line-height:1.2}
 .lines{position:relative}
 .lines::before,.lines::after{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--ink)}
 .lines::before{left:0}
 .lines::after{right:0}
 .pm.last .lines::after{width:5px}
-.pn{position:relative;display:flex;align-items:center;justify-content:center;height:2.15em;font-weight:900;font-size:1.25em}
+.pn{position:relative;display:flex;align-items:center;justify-content:center;height:2.7em;font-weight:900}
+.pn .slm{font-size:1.25em}
 .pn::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line-strong)}
 .pn.bt::after{content:"";position:absolute;left:0;top:0;bottom:0;border-left:1px dashed var(--line)}
-.pn span{position:relative;z-index:1;background:var(--surface);padding:0 .12em;line-height:1.1;border-radius:.2em}
-.sheet.dense .pn{font-size:1.05em}
+.pn span{position:relative;z-index:1;background:var(--surface);padding:0 .12em;line-height:1.1;border-radius:.2em;font-size:1.25em}
+.pn span.run{font-size:.85em;white-space:nowrap;letter-spacing:-.03em}
+.sheet.dense .pn span{font-size:1.05em}
+.sheet.dense .pn span.run{font-size:.72em}
+.sheet.dense .pn .slm{font-size:1.05em}
 .band{position:absolute;top:0;bottom:0;left:0;width:calc(100% / var(--n));transform:translateX(calc(var(--s,0) * 100%));background:var(--band);border-left:2px solid var(--band-edge);border-right:2px solid var(--band-edge);z-index:3;pointer-events:none;opacity:0;transition:transform .07s linear}
 .pm.cur .band{opacity:1}
 .pm-prog{height:4px;border-radius:2px;background:var(--surface2);margin-top:.5em;overflow:hidden}
@@ -314,7 +322,10 @@ const uid = () => 's' + Date.now().toString(36) + Math.random().toString(36).sli
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtDate = ts => { try { return new Date(ts).toLocaleDateString('ja-JP', { year: 'numeric', month: 'numeric', day: 'numeric' }); } catch (e) { return ''; } };
 const fmtTime = ms => { const s = Math.max(0, Math.round(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
-const disp = v => (v === 'x' ? '×' : v);
+const disp = v => v.replace(/x/g, '×');
+const isRun = v => v.indexOf('-') >= 0;
+const firstNote = v => v.split('-')[0];
+const lastNote = v => { const p = v.split('-').filter(Boolean); return p.length ? p[p.length - 1] : ''; };
 
 function h(tag, props, ...kids) {
   const el = document.createElement(tag);
@@ -380,11 +391,17 @@ const emptyStep = () => ({ c: '', f: ['', '', '', ''], sl: [false, false, false,
 const isEmptyStep = st => !st.c && !st.y && st.f.every(v => v === '') && !st.sl.some(Boolean);
 const newMeasure = n => ({ memo: '', steps: Array.from({ length: n }, emptyStep) });
 
-function cleanFret(v) {
+function cleanFret1(v) {
   v = String(v == null ? '' : v).trim().toLowerCase();
   if (v === 'x') return 'x';
   if (/^\d{1,2}$/.test(v) && Number(v) <= 24) return String(Number(v));
   return '';
+}
+// 1マスに素早く続けて弾く音を最大4つまで "5-7-5" の形で持てる（入力途中の末尾の「-」は取り除く）
+function cleanFret(v) {
+  v = String(v == null ? '' : v).trim().toLowerCase();
+  if (v.indexOf('-') < 0) return cleanFret1(v);
+  return v.split('-').map(cleanFret1).filter(Boolean).slice(0, 4).join('-');
 }
 
 function normalizeSong(raw) {
@@ -543,12 +560,12 @@ function strLabel(song, k) {
 
 // スライド記号の向き：次に出てくる同じ弦の音が高ければ「/」、低ければ「\」
 function slideDir(song, m, s, k) {
-  const n = song.beats * song.spb, cur = Number(song.measures[m].steps[s].f[k]);
+  const n = song.beats * song.spb, cur = Number(lastNote(song.measures[m].steps[s].f[k]));
   let mm = m, ss = s + 1;
   for (let c = 0; c < n * 2; c++) {
     if (ss >= n) { mm++; ss = 0; }
     const mo = song.measures[mm]; if (!mo) break;
-    const v = mo.steps[ss].f[k];
+    const v = firstNote(mo.steps[ss].f[k]);
     if (v !== '' && v !== 'x') return Number(v) >= cur || isNaN(cur) ? 'up' : 'dn';
     ss++;
   }
@@ -619,8 +636,8 @@ function previewSVG(song) {
       if (st.c) out += `<text class="cd" x="${cx.toFixed(1)}" y="16">${esc(st.c)}</text>`;
       ord.forEach((k, r) => {
         const v = st.f[k]; if (v === '') return;
-        const t = disp(v), w = t.length * 5.2 + 2;
-        out += `<rect class="nbg" x="${(cx - w / 2).toFixed(1)}" y="${ys[r] - 4.6}" width="${w.toFixed(1)}" height="9.2"/><text class="nt" x="${cx.toFixed(1)}" y="${ys[r] + 3}">${esc(t)}</text>`;
+        const t = disp(v), run = isRun(v), w = t.length * (run ? 3.9 : 5.2) + 2;
+        out += `<rect class="nbg" x="${(cx - w / 2).toFixed(1)}" y="${ys[r] - 4.6}" width="${w.toFixed(1)}" height="9.2"/><text class="nt${run ? ' run' : ''}" x="${cx.toFixed(1)}" y="${ys[r] + 3}">${esc(t)}</text>`;
       });
     });
   });
@@ -873,7 +890,7 @@ function viewEditor(id) {
       tab.append(h('span', { class: 'lab' }, strLabel(song, k)));
       m.steps.forEach((st, s) => {
         tab.append(h('div', { class: 'cell' + (s === 0 ? ' first' : '') + (s === n - 1 ? ' last' : '') + (s > 0 && s % spb === 0 ? ' bt' : ''), dataset: { m: mi, s, k } },
-          h('span', { class: 'v' }, disp(st.f[k])),
+          h('span', { class: 'v' + (isRun(st.f[k]) ? ' run' : '') }, disp(st.f[k])),
           st.sl[k] ? h('i', { class: 'slm ' + slideDir(song, mi, s, k) }) : null));
       });
     });
@@ -903,7 +920,11 @@ function viewEditor(id) {
     measuresEl.replaceChildren(...song.measures.map((_, i) => buildMeasure(i)), addRow);
     updateSelUI(false); updateInfo();
   }
-  function paintCell(m, s, k) { const el = cellEl(m, s, k); if (el) el.querySelector('.v').textContent = disp(song.measures[m].steps[s].f[k]); }
+  function paintCell(m, s, k) {
+    const el = cellEl(m, s, k); if (!el) return;
+    const v = song.measures[m].steps[s].f[k], sp = el.querySelector('.v');
+    sp.textContent = disp(v); sp.className = 'v' + (isRun(v) ? ' run' : '');
+  }
   function syncSlideCell(m, s, k) {
     const el = cellEl(m, s, k); if (!el) return;
     let mk = el.querySelector('.slm');
@@ -942,7 +963,16 @@ function viewEditor(id) {
     infoEl.replaceChildren('選択中：', h('b', {}, `${sel.m + 1}小節 ${beat}拍目${subTxt} ${STRINGS[sel.k]}弦`));
     updateSymBtns();
   }
-  function setSel(m, s, k, scroll) { sel = { m, s, k }; updateSelUI(scroll); updateInfo(); }
+  // 「5-」のように次の音を待っている状態のまま別のマスへ移ったら、末尾の「-」を取り除く
+  function tidyPending() {
+    const st = song.measures[sel.m] && song.measures[sel.m].steps[sel.s];
+    if (!st || !/-$/.test(st.f[sel.k])) return;
+    st.f[sel.k] = st.f[sel.k].replace(/-+$/, ''); touch(); paintCell(sel.m, sel.s, sel.k); syncSlides(sel.m);
+  }
+  function setSel(m, s, k, scroll) {
+    if (m !== sel.m || s !== sel.s || k !== sel.k) tidyPending();
+    sel = { m, s, k }; updateSelUI(scroll); updateInfo();
+  }
   function move(ds, dk) {
     let { m, s, k } = sel; const n = N();
     if (ds) {
@@ -961,15 +991,40 @@ function viewEditor(id) {
     snapshot(`cell:${m}:${s}:${k}`);
     st.f[k] = val; touch(); paintCell(m, s, k); syncSlides(m);
   }
+  // 数字の入力。「5-」の直後なら同じマスに次の音として足す。すぐ続けて押した数字は2桁にまとめる（1→2 で12）
   function enterDigit(d) {
     const { m, s, k } = sel, st = song.measures[m].steps[s], cur = st.f[k], now = Date.now(), key = `${m}:${s}:${k}`;
     let val = d;
-    if (cur !== '' && cur !== 'x' && cur.length === 1 && lastDigit.cell === key && now - lastDigit.t < 900) {
-      const comb = cur + d;
-      if (Number(comb) <= 15) val = comb;
+    if (cur !== '' && cur !== 'x') {
+      const parts = cur.split('-'), last = parts[parts.length - 1];
+      if (last === '') val = cur + d;
+      else if (last.length === 1 && lastDigit.cell === key && now - lastDigit.t < 900 && Number(last + d) <= 15) {
+        parts[parts.length - 1] = last + d; val = parts.join('-');
+      }
     }
     lastDigit = { cell: key, t: now };
     setVal(val);
+  }
+  function enterFret(n) {
+    const { m, s, k } = sel, cur = song.measures[m].steps[s].f[k];
+    lastDigit = { cell: '', t: 0 };
+    setVal(/-$/.test(cur) ? cur + n : n);
+  }
+  // 同じマスにもう1音（素早く 5→7→5 と弾く）。最大4音
+  function addNote() {
+    const { m, s, k } = sel, cur = song.measures[m].steps[s].f[k];
+    if (cur === '' || cur === 'x' || /-$/.test(cur)) return;
+    if (cur.split('-').length >= 4) { toast('1つのマスに入れられるのは4音までです'); return; }
+    lastDigit = { cell: '', t: 0 };
+    setVal(cur + '-');
+  }
+  // Backspace：複数音なら最後の1音だけ消す。Delete は全部消す
+  function backOne() {
+    const { m, s, k } = sel, cur = song.measures[m].steps[s].f[k];
+    if (!isRun(cur)) { setVal(''); return; }
+    const parts = cur.split('-');
+    parts.pop();   // 末尾の「-」だけ待っているときは「-」だけ、そうでなければ最後の1音を消す
+    setVal(parts.join('-'));
   }
   function applyChord(name) {
     const { m, s } = sel, st = song.measures[m].steps[s];
@@ -1069,7 +1124,9 @@ function viewEditor(id) {
     else if (key === 's' || key === 'S') { e.preventDefault(); toggleSlide(); }
     else if (key === '/') { e.preventDefault(); toggleStroke('/'); }
     else if (key === '*') { e.preventDefault(); toggleStroke('x'); }
-    else if (key === 'Backspace' || key === 'Delete') { e.preventDefault(); setVal(''); }
+    else if (key === '-') { e.preventDefault(); addNote(); }
+    else if (key === 'Backspace') { e.preventDefault(); backOne(); }
+    else if (key === 'Delete') { e.preventDefault(); setVal(''); }
     else if (key === 'ArrowRight' || (key === 'Enter' && !e.shiftKey)) { e.preventDefault(); move(1, 0); }
     else if (key === 'ArrowLeft' || (key === 'Enter' && e.shiftKey)) { e.preventDefault(); move(-1, 0); }
     else if (key === 'ArrowUp') { e.preventDefault(); move(0, -1); }
@@ -1090,12 +1147,13 @@ function viewEditor(id) {
   const crossBtn = symBtn('strumx', '連続で弾く', '4本の弦をまたぐクロススラッシュ（キー: *）', () => toggleStroke('x'));
   const padKeys = [];
   for (let i = 0; i <= 9; i++) padKeys.push({ label: String(i), aria: `フレット${i}`, fn: () => enterDigit(String(i)) });
-  [10, 11, 12, 13, 14, 15].forEach(n => padKeys.push({ label: String(n), aria: `フレット${n}`, fn: () => { lastDigit = { cell: '', t: 0 }; setVal(String(n)); } }));
+  [10, 11, 12, 13, 14, 15].forEach(n => padKeys.push({ label: String(n), aria: `フレット${n}`, fn: () => enterFret(String(n)) }));
   padKeys.push({ label: '×', aria: 'ミュート', fn: () => setVal('x'), sp: true });
-  padKeys.push({ label: '⌫', aria: 'この音を消す', fn: () => setVal(''), sp: true });
+  padKeys.push({ label: '⌫', aria: 'この音を消す（素早く弾く音は最後の1音だけ）', fn: backOne, sp: true });
+  padKeys.push({ label: '5-7', aria: '同じマスにもう1音足す（素早く弾く）', fn: addNote, sp: true, run: true });
   padKeys.push({ label: '◀', aria: '左へ', fn: () => move(-1, 0), sp: true });
   padKeys.push({ label: '▶', aria: '右へ', fn: () => move(1, 0), sp: true });
-  const pad = h('div', { class: 'pad' }, padKeys.map(k => h('button', { class: 'key' + (k.sp ? ' sp' : ''), type: 'button', 'aria-label': k.aria, onMousedown: noMouseFocus, onClick: k.fn }, k.label)));
+  const pad = h('div', { class: 'pad' }, padKeys.map(k => h('button', { class: 'key' + (k.sp ? ' sp' : '') + (k.run ? ' run' : ''), title: k.run ? '同じマスにもう1音足す（キー: -）。例：5 → 5-7 → 7 → 5-7-5' : null, type: 'button', 'aria-label': k.aria, onMousedown: noMouseFocus, onClick: k.fn }, k.label)));
   const fillChk = h('input', { type: 'checkbox', checked: !!prefs.chordFill, onChange: e => { prefs.chordFill = e.target.checked; savePrefs(); } });
   const dock = h('div', { class: 'dock' }, h('div', { class: 'dock-in' },
     h('div', { class: 'dock-info' }, infoEl,
@@ -1122,7 +1180,7 @@ function viewEditor(id) {
       h('label', { class: 'fld' }, h('span', {}, '1拍の分け方'), spbSel),
       h('div', { class: 'fld' }, h('span', {}, 'G弦のチューニング'), tuneSeg),
       statusEl),
-    h('p', { class: 'kbd-hint' }, 'キーボード：数字でフレット、x でミュート、s でスライド、/ で「続けて弾く」、* で「連続で弾く」、矢印で移動、Enter で右へ、c でコード入力、Ctrl+Z で元に戻す。'),
+    h('p', { class: 'kbd-hint' }, 'キーボード：数字でフレット、- で同じマスにもう1音（素早く 5-7-5）、x でミュート、s でスライド、/ で「続けて弾く」、* で「連続で弾く」、矢印で移動、Enter で右へ、c でコード入力、Ctrl+Z で元に戻す。'),
     h('main', { class: 'ed-main' }, measuresEl),
     dock, settings.pop);
   syncTuneUI();
@@ -1262,7 +1320,7 @@ function viewPlayer(id) {
       const symlayer = h('div', { class: 'symlayer' }, m.steps.map((st, s) => (st.y ? symEl(st.y, s) : null)));
       const lines = h('div', { class: 'lines' }, ord.map(k => h('div', { class: 'srow' },
         m.steps.map((st, s) => h('div', { class: 'pn' + (s > 0 && s % spb === 0 ? ' bt' : '') },
-          st.f[k] !== '' ? h('span', {}, disp(st.f[k])) : null,
+          st.f[k] !== '' ? h('span', { class: isRun(st.f[k]) ? 'run' : '' }, disp(st.f[k])) : null,
           st.sl[k] ? h('i', { class: 'slm ' + slideDir(song, mi, s, k) }) : null)))), symlayer);
       const steps = h('div', { class: 'steps' }, band, chordsRow, lines);
       const labels = h('div', { class: 'labels' }, h('span'), ord.map(k => h('span', {}, strLabel(song, k))));
