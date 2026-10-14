@@ -1,6 +1,0 @@
-{
-  // Cloudflare Workers（静的アセット配信）用の設定。Pagesを使う場合は不要です。
-  "name": "uke-tab-note",
-  "compatibility_date": "2026-10-01",
-  "assets": { "directory": "./public" }
-}
